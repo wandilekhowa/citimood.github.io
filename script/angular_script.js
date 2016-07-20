@@ -108,7 +108,8 @@ app.controller("ProfileCtrl", function($scope, $firebaseArray, $firebaseAuth, $f
 {
 	$scope.userName = $routeParams.name;		
 	console.log($scope.userName);
-
+	$scope.profilePic = "";
+	$scope.pictures = "";
 	$scope.count = 0;
   var id = $routeParams.userID;
   $scope.ref = firebase.database().ref().child("Users");
