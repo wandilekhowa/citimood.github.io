@@ -1,0 +1,247 @@
+    li #edu-menu{
+        color: red;
+    }
+
+
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding-top: 0px;
+        padding-left: 120px;
+        width: 50%;
+        height: 20px;
+        display: inline-block;
+        position: fixed;
+        right: 0px;
+    }
+
+    li a {
+        display: inline-block;
+        color: white;
+        height: 17px;
+        font-size: 17px;
+        float: right;
+        padding: 25px;
+        text-decoration: none;   
+    }
+
+    nav{
+        padding-top: 0px;
+        position: fixed;
+    }
+
+    #navTitle{
+        padding-left: 20px;
+        padding-right: 100px;
+        display: inline-block;
+        position: left;
+        color: white;
+        width: 25%;
+        position: fixed;
+    }
+
+    li a:hover{
+        font-size: 20px;
+        height: 30px;
+        color: red;
+        transform: scale(1.1);
+    }
+
+    a h1:hover{
+        color: red;
+    }
+
+    html{
+        background-color: black;
+    }
+
+    .wrapper{
+        width: 100%;
+        margin: 0px auto;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body{
+        margin:0;
+        padding:0;
+    }
+
+    .clearfix:after {
+         visibility: hidden;
+         display: block;
+         font-size: 0;
+         content: " ";
+         clear: both;
+         height: 0;
+         }
+    .clearfix { display: inline-block; }
+    /* start commented backslash hack \*/
+    * html .clearfix { height: 1%; }
+    .clearfix { display: block; }
+    /* close commented backslash hack */
+
+    .intro-text h3{
+        padding-top: 20px;
+        color: white;
+        text-align: center;
+    }
+
+    .intro-text{
+        padding-top: 60px;
+        width:100%;
+        display: inline-block;
+    }
+
+    .first-icon, .second-icon, .third-icon, .fourth-icon{
+        margin-top: 30px;
+        width: 6.25%;
+        display: block;
+        float: left;
+        height: 60px;
+    }
+
+    #icon, a img, .big{
+        width:100%;
+        height: 100%;
+        border: 10px solid black;
+    }
+
+    #navTitle:hover{
+        color: red;
+    }
+
+    .first-pic{
+        width: 30%;
+        display: block;
+        float: left;
+        height: 300px;
+        padding: 20px;
+    }
+
+    .second-pic{
+        width: 30%;
+        display: block;
+        float: right;
+        height: 300px;
+        padding: 20px;
+    }
+
+    .first-par{
+        width: 70%;
+        display: block;
+        float: left;
+        height: 300px;
+        padding: 20px;
+    }
+
+    .second-par{
+        width: 70%;
+        display: block;
+        float: right;
+        height: 300px;
+        padding: 20px;
+    }
+
+    .last-par{
+        width: 100%;
+    }
+
+    .top-text{
+        width:100%;
+
+    }
+
+    div h4, div h1{
+        color: white;
+    }
+
+    div h4{
+        padding-top: 20px;
+    }
+
+    div h1{
+        padding-top: 20px;
+        text-align: center;
+    }
+
+    a img:hover{
+        width:110%;
+        height: 110%;
+        transform: scale(1.1);
+    }
+
+    @media(max-width: 768px)
+    {
+        .first-par, .second-par{
+            width: 100%;
+            height: 50%;
+        }
+
+        .first-pic, .second-pic{
+            width: 65%;
+            height: 35%;
+        }
+
+        .first-pic{
+            margin-left:70px; 
+        }
+
+        .second-pic{
+            margin-right:80px; 
+        }
+
+    }
+
+    .container{
+        position: relative;
+        overflow: hidden;
+    }
+
+    .background{
+        position: absolute;
+        left: 0%;
+        top: 0%;
+        width: 100%;
+        height: auto;
+        opacity: 0.2;
+    }
+
+    @media(max-width: 860px){
+        .first-icon, .second-icon, .third-icon, .fourth-icon{
+        margin-top: 30px;
+        width: 10%;
+        display: block;
+        float: left;
+        height: 60px;
+        margin-left: 28px;
+        }
+        .fake{
+            width: 0%;
+            height: 0%;
+        }
+    }
+
+    @media(max-width: 660px){
+        .first-icon, .second-icon, .third-icon, .fourth-icon{
+        margin-top: 30px;
+        width: 10%;
+        display: block;
+        float: left;
+        height: 60px;
+        margin-left: 42.9px;
+        }
+    }
+
+    @media(max-width: 460px){
+        .first-icon, .second-icon, .third-icon, .fourth-icon{
+        margin-top: 30px;
+        width: 18%;
+        display: block;
+        float: left;
+        height: 60px;
+        margin-left: 0px;
+        }
+    }

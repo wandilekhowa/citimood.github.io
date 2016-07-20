@@ -1,0 +1,311 @@
+	ul {
+	    list-style-type: none;
+	    margin: 0;
+	    padding-top: 0px;
+	    padding-left: 120px;
+	    width: 50%;
+	    height: 20px;
+	    display: inline-block;
+	    position: fixed;
+	    right: 0px;
+	}
+
+	li a {
+	    display: inline-block;
+	    color: white;
+	    height: 17px;
+	    font-size: 17px;
+	    float: right;
+	    padding: 25px;
+	 	text-decoration: none;   
+	}
+
+
+	li a:hover{
+		font-size: 20px;
+		height: 30px;
+		color: red;
+		transform: scale(1.1);
+	}
+
+	a h1:hover{
+		color: red;
+	}
+
+	nav{
+		padding-top: 0px;
+		position: fixed;
+	}
+
+	#navTitle{
+		padding-left: 20px;
+		padding-right: 100px;
+		display: inline-block;
+		position: left;
+		color: white;
+		width: 25%;
+		position: fixed;
+	}
+
+	#navTitle:hover{
+		color: red;
+	}
+
+	html{
+		background-color: black;
+	}
+
+	.wrapper{
+		width: 100%;
+		margin: 0px auto;
+	}
+
+	* {
+		box-sizing: border-box;
+	}
+
+	body{
+		margin:0;
+		padding:0;
+	}
+	.clearfix:after {
+	     visibility: hidden;
+	     display: block;
+	     font-size: 0;
+	     content: " ";
+	     clear: both;
+	     height: 0;
+	     }
+	.clearfix { display: inline-block; }
+	/* start commented backslash hack \*/
+	* html .clearfix { height: 1%; }
+	.clearfix { display: block; }
+	/* close commented backslash hack */
+
+	.personal, .educational, .professional, .projects, .hover-overlay{
+		
+		width: 25%;
+		display: block;
+		float: left;
+		height: 200px;
+		margin: 0px;
+	}
+
+	.pers-img::before {
+	  content: "";
+	  display: block;
+	  position: absolute;
+	  top: 0;
+	  left: 0;
+	  right: 0;
+	  bottom: 0;
+	  background: rgba(0,0,0,.7);
+	  opacity: 0;
+	  transition: all .3s;
+	}
+
+	.edu-img::before {
+	  content: "";
+	  display: block;
+	  position: absolute;
+	  top: 0;
+	  left: 0;
+	  right: 0;
+	  bottom: 0;
+	  background: rgba(0,0,0,.7);
+	  opacity: 0;
+	  transition: all .3s;
+	}
+
+	.proj-img::before {
+	  content: "";
+	  display: block;
+	  position: absolute;
+	  top: 0;
+	  left: 0;
+	  right: 0;
+	  bottom: 0;
+	  background: rgba(0,0,0,.7);
+	  opacity: 0;
+	  transition: all .3s;
+	}
+
+	.prof-img::before {
+	  content: "";
+	  display: block;
+	  position: absolute;
+	  top: 0;
+	  left: 0;
+	  right: 0;
+	  bottom: 0;
+	  background: rgba(0,0,0,.7);
+	  opacity: 0;
+	  transition: all .3s;
+	}
+
+	.pers-img, .edu-img, .prof-img, .proj-img{
+		background-size: cover;
+	  	background-position: center center;
+	  	position: relative;
+	}
+
+	.pers-img:hover::before {
+	  opacity: 1;
+	}
+
+	.prof-img:hover::before {
+	  opacity: 1;
+	}
+
+	.proj-img:hover::before {
+	  opacity: 1;
+	}
+
+	.edu-img:hover::before {
+	  opacity: 1;
+	}
+
+
+	.real-pers, .real-prof, .real-proj, .real-edu{
+	  opacity: 0;
+	  color: white;
+	  font-family: Helvetica;
+	  transition: all .3s;  
+	  position: absolute;
+	  top: 50%;
+	  left: 50%;
+	  transform: translate(-50%,-50%);
+	}
+
+	.pers-img:hover .real-pers {
+	  opacity: 1;
+	  transform: translate(-180%,-20%);
+	  wi
+	}
+
+	.proj-img:hover .real-proj {
+	  opacity: 1;
+	  transform: translate(-180%,-20%);
+	}
+
+	.edu-img:hover .real-edu {
+	  opacity: 1;
+	  transform: translate(-180%,-20%);
+	}
+
+	.prof-img:hover .real-prof {
+	  opacity: 1;
+	  transform: translate(-180%,-20%);
+	}
+
+
+	.pers-img{
+		background-image: url(cape-town.jpg);
+		border: 10px solid black;
+	}
+
+	.edu-img{
+		background-image: url(edu.jpg);
+		border: 10px solid black;
+	}
+
+	.prof-img{
+		background-image: url(computer.jpg);
+		border: 10px solid black;
+	}
+
+	.proj-img{
+		background-image: url(projects.jpg);
+		border: 10px solid black;
+	}
+
+	.intro-text{
+		padding-top: 60px;
+		width:100%;
+
+	}
+
+	.outro-text{
+		width:100%;
+		text-align: center;
+		color: white;
+	}
+
+	.intro-text h1{
+		padding-top: 20px;
+		color: white;
+		text-align: center;
+	}
+
+	div #desc{
+		padding-left: 100px;
+		text-align: center;
+		text-decoration: none; 
+		color: white;
+	}
+
+	img{
+		width:100%;
+		height: 100%;
+		border: 3px solid black;
+	}
+
+	@media(max-width: 760px){
+		.personal, .educational, .professional, .projects{
+			width: 100%;
+			height: 100%;
+		}
+	}
+
+	h3 a {
+	    color: white;
+	 	text-decoration: none;   
+	}
+
+	@media(max-width: 768px)
+	{
+		.personal{
+		
+		width: 51%;
+		display: inline-block;
+		height: 200px;
+		margin-left: 150px;
+		}
+
+		.educational{
+		
+		width: 51%;
+		display: inline-block;
+		height: 200px;
+		margin-left: 150px;
+		}
+
+		.professional{
+		
+		width: 51%;
+		display: inline-block;
+		height: 200px;
+		margin-left: 150px;
+		}
+
+		.projects{
+		
+		width: 51%;
+		display: inline-block;
+		height: 200px;
+		margin-left: 150px;
+		}
+
+		.hover-overlay{
+		
+		width: 51%;
+		display: inline-block;
+		height: 200px;
+		margin-left: 150px;
+		}
+
+		.fake{
+			width: 0px;
+			height: 0px;
+		}
+	}
