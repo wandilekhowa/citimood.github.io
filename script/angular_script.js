@@ -305,7 +305,7 @@ app.controller("ProfileCtrl", function($scope, $http, $firebaseArray, $firebaseA
                         console.log($scope.picsArray.length+" "+$scope.postsArray.length);
                         analyzeSentiments($scope.picsArray);
                         analyzeSentiments($scope.postsArray);
-                        console.log(summation($captionScores));
+                        console.log(summation($scope.captionScores));
                       }
                     });
                   }
