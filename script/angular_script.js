@@ -188,7 +188,6 @@ app.controller("ProfileCtrl", function($scope, $http, $firebaseArray, $firebaseA
                             $scope.days.push(formatDate(value[i].created_time));
                             try
                             {
-                              $scope.sentimentsArray.push(value[i].name);
                               $scope.days.push(formatDate(value[i].created_time));
                               $scope.picLikes += value[i].likes.data.length;
                               if(value[i].likes.data.length >= $scope.sumL)
