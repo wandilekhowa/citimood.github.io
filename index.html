@@ -1,47 +1,122 @@
-  <!DOCTYPE html>
-  <html>
-    <head>
-      <script src="Day4/facebook.js"></script>
-      <link type="text/css" rel="stylesheet" href="Day4/home.css"/>
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-      <title>Wandile's Personal Website</title>
-    </head>
-    <body>
-    <div class="wrapper">
-    <nav class="clearfix">
-      <a href="index.html"><h1 id="navTitle">Wandile</h1></a>
-      <ul class="list">
-        <li><a id="proj-menu" href="Day4/projects.html">Project</a></li>
-        <li><a id="prof-menu" href="Day4/professional.html">Professional</a></li>
-        <li><a id="edu-menu" href="Day4/education.html">Educational</a></li>
-        <li><a id="pers-menu" href="Day4/personal.html">Personal</a></li>
-      </ul>
-    </nav>
-    <div class="wrapper clearfix">
-        <div class="intro-text">
-          <h1>This is the introduction of my website</h1>  
-        </div>
+<!DOCTYPE html>
+<html >
+  <head>
+   
+  <title>City Mood- South Africa</title>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+  
+  <link rel = "stylesheet" href="css/animate.css">
+  <link rel = "stylesheet" href="css/font-awesome.css">
+  <link rel = "stylesheet" href="css/bootstrap-social.css">
+  <link rel="stylesheet" href="css/styles.css">
+  
+   
+  </head>
+  <body ng-app="citymoodApp" ng-controller="AppController">
+    <script>     
+        // This is called with the results from from FB.getLoginStatus().
+  function statusChangeCallback(response) {
+    console.log('statusChangeCallback');
+    console.log(response);
+    // The response object is returned with a status field that lets the
+    // app know the current login status of the person.
+    // Full docs on the response object can be found in the documentation
+    // for FB.getLoginStatus().
+    if (response.status === 'connected') {
+      // Logged into your app and Facebook.
+      testAPI();
+    } else if (response.status === 'not_authorized') {
+      // The person is logged into Facebook, but not your app.
+      document.getElementById('status').innerHTML = 'Please log ' +
+        'into this app.';
+    } else {
+      // The person is not logged into Facebook, so we're not sure if
+      // they are logged into this app or not.
+      document.getElementById('status').innerHTML = 'Please log ' +
+        'into Facebook.';
+    }
+  }
 
-        <div class="personal fake"><div class="hover-overlay"></div></div>
+  // This function is called when someone finishes with the Login
+  // Button.  See the onlogin handler attached to it in the sample
+  // code below.
+  function checkLoginState() {
+    FB.getLoginStatus(function(response) {
+      statusChangeCallback(response);
+    });
+  }
 
-        <a id="proj-menu" href="Day4/personal.html"><div class="personal pers-img"><div class="hover-overlay real-pers"><h3>Personal Information</h3></div></div></a>
+  window.fbAsyncInit = function() {
+  FB.init({
+    appId      : '269074203460979',
+    cookie     : true,  // enable cookies to allow the server to access 
+                        // the session
+    xfbml      : true,  // parse social plugins on this page
+    version    : 'v2.7' // use graph api version 2.7
+  });
 
-        <a id="proj-menu" href="Day4/education.html"><div class="educational edu-img"><div class="hover-overlay real-edu"><h3>Educational Background</h3></div></div></a>
+  // Now that we've initialized the JavaScript SDK, we call 
+  // FB.getLoginStatus().  This function gets the state of the
+  // person visiting this page and can return one of three states to
+  // the callback you provide.  They can be:
+  //
+  // 1. Logged into your app ('connected')
+  // 2. Logged into Facebook, but not your app ('not_authorized')
+  // 3. Not logged into Facebook and can't tell if they are logged into
+  //    your app or not.
+  //
+  // These three cases are handled in the callback function.
 
-        <div class="educational fake"><div class="hover-overlay"></div></div>
+  FB.getLoginStatus(function(response) {
+    statusChangeCallback(response);
+  });
 
-        <div class="professional fake"><div class="hover-overlay"></div></div>
+  };
 
-        <a id="proj-menu" href="Day4/professional.html"><div class="professional prof-img"><div class="hover-overlay real-prof"><h3>Professional Qualifications</h3></div></div></a>
+  // Load the SDK asynchronously
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "https://connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
 
-        <a id="proj-menu" href="Day4/projects.html"><div class="projects proj-img"><div class="hover-overlay real-proj"><h3>Projects</h3></div></div></a>
-
-        <div class="projects fake"><div class="hover-overlay"></div></div>
-        <button class="btn btn-primary" scope="public_profile,email" onlogin="checkLoginState();">Login</button>
-        <div id="status"></div>
-        <div class="fb-like" data-share="true" data-width="450" data-show-faces="true">
-        </div>
-    </div>
-    </div>
-    </body>
-  </html>
+  // Here we run a very simple test of the Graph API after login is
+  // successful.  See statusChangeCallback() for when this call is made.
+  function testAPI() 
+  {
+    console.log('Welcome!  Fetching your information.... ');
+    FB.api('/me?fields=id,name,cover,hometown,about,bio,gender,languages,link,locale,location,updated_time,timezone,work', function(response) 
+    {
+      console.log(response);
+      window.location.href = "/#/profile/"+response.id+"/"+response.name+"/"+response.hometown.name;
+    });
+  }
+      </script>
+  
+     <div ng-view ></div>
+    
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/3.2.0/firebase.js"></script>
+    <script src="script/angular.js"></script><!--you might need CDN here-->
+    <script src="script/angular-route.js"></script><!--you might need CDN here-->
+    <!-- AngularFire -->
+    <script src="script/angularfire.min.js"></script>
+    <script src="script/angular_script.js"></script>
+    
+    <script>
+      // Initialize Firebase
+      var config = {
+      apiKey: "AIzaSyAPUKXtDWPqsfYu4IkjWOdJOnYwBt3CZKY",
+      authDomain: "city-mood-fab55.firebaseapp.com",
+      databaseURL: "https://city-mood-fab55.firebaseio.com",
+      storageBucket: "city-mood-fab55.appspot.com",
+      };
+      firebase.initializeApp(config);
+    </script>
+    
+  </body>
+</html>
