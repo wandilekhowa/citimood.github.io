@@ -330,7 +330,7 @@ app.controller("ProfileCtrl", function($scope, $http, $firebaseArray, $firebaseA
 			}).then(function(response) {
 				if(response.data.score)
 				{
-					$scope.grandTotal += response.data.score.toFixed(2); //this is the overall sentiments score!!!
+					$scope.grandTotal += response.data.score; //this is the overall sentiments score!!!
 					$scope.captionScores.push((response.data.score).toFixed(2));
 				}
 			})
