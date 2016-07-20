@@ -253,7 +253,7 @@ app.controller("ProfileCtrl", function($scope, $firebaseArray, $firebaseAuth, $f
                         var differntDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
                         $scope.finalDay = differntDays[commonDay[0][0]];
                         console.log($scope.finalDay);
-                        console.log("Best pic: "+ $scsope.bestPic+" and the best post: "+$scope.bestPost);
+                        console.log("Best pic: "+ $scope.bestPic+" and the best post: "+$scope.bestPost);
                       }
                     });
                   }
