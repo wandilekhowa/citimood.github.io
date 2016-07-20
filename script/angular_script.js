@@ -116,7 +116,6 @@ app.controller("ProfileCtrl", function($scope, $firebaseArray, $firebaseAuth, $f
   $scope.Users = $firebaseArray($scope.ref.child($routeParams.userID));
   $scope.pictures = [];
   console.log($routeParams.userID);
-  $scope.userName = $routeParams.userName;
   $scope.home = $routeParams.userHometown;
   FB.api('/me?fields=id,name,cover,hometown,about,bio,gender,picture,locale,location,updated_time,timezone,work', function(response) 
   {
