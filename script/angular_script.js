@@ -154,6 +154,8 @@ app.controller("ProfileCtrl", function($scope, $http, $firebaseArray, $firebaseA
   FB.api('/'+$routeParams.userID+'/albums?fields=id,count,cover_photo,created_time,description,event,from,link,location,name,place,privacy,type,updated_time', function(response) 
   {
     $scope.days = [];
+    $scope.picsArray = [];
+    $scope.postsArray = [];
       $scope.picLikes = 0;
       $scope.commentTotal = 0;
        $scope.albumID = response.data[1].id;
