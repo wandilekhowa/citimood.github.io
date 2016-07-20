@@ -36,7 +36,39 @@ app.config( function($routeProvider)
         return $firebaseAuth().$waitForSignIn();
       }
     }
-  })/*.when('/signup', 
+  })
+
+  var formatDate = function(d)
+    {
+      date = new Date(d)
+      var dayOfPost = date.getDay();
+      return dayOfPost;
+    }
+
+Array.prototype.most= function(num){
+  if(Number(num) !== NaN)
+  {
+    var L= this.length, freq= [], unique= [], 
+    tem, max= 1, index, count;
+    while(L>= max){
+        tem= this[--L];
+        if(unique.indexOf(tem)== -1){
+            unique.push(tem);
+            index= -1, count= 0;
+            while((index= this.indexOf(tem, index+1))!= -1){
+                ++count;
+            }
+            if(count> max){
+                freq= [tem];
+                max= count;
+            }
+            else if(count== max) freq.push(tem);
+        }
+    }
+  }
+  return [freq];
+}
+  /*.when('/signup', 
   {
     controller: 'SignupCtrl',
     templateUrl: 'templates/signup.html',
@@ -74,7 +106,8 @@ app.controller("AppController", function($scope, $firebaseArray, $firebaseAuth,$
 
 app.controller("ProfileCtrl", function($scope, $firebaseArray, $firebaseAuth,$routeParams,$location,$window,currentAuth) 
 {
-	console.log($routeParams.id);		
+	$scope.userName = $routeParams.name;		
+	console.log($scope.userName);
 		
 		/* $scope.authObj = $firebaseAuth();
 		$scope.login= function()
