@@ -62,6 +62,48 @@ app.config( function($routeProvider)
   }) */;
 });
 
+var analyzeSentiments = function(mySentiments) 
+{
+    // when you call this function, $scope.picArray should have an array of all 
+    // your instas. Use the sentiment analysis API to get a score of how positive your 
+    // captions are
+    	for(var i=0;i<5;i++)
+    	{
+    		$http({
+				url:"https://twinword-sentiment-analysis.p.mashape.com/analyze/",
+				method: "GET",
+				headers: {
+					"X-Mashape-Key": "Fmjs327SMdmshHTjtTjZ8WXuN8ANp1NAEJwjsniGMiICvKhpSG",
+				},
+				params:{
+					text: mySentiments[i]
+				}
+			}).then(function(response) {
+				$scope.grandTotal += response.data.score;
+				$scope.captionScores.push((response.data.score).toFixed(2));
+			})
+		}
+		// $http({
+		// 		url:"https://api.clarify.io:443/v1/bundles",
+		// 		method: "GET",
+		// 		headers: {
+		// 			"Authorization": "Bearer {WJvnnK8AFLQ2ch8WARAKtV3h2nS7AY}",
+		// 		},
+		// 	}).then(function(response) {
+		// 		console.log(response);
+		// 	})
+}
+
+var sumation = function(arrayNums)
+{
+	var count=0;
+   	for (var i=arrayNums.length; i--) 
+   	{
+       count+=arrayNums[i];
+   	}
+   	return count;
+}
+
 var formatDate = function(d)
     {
       date = new Date(d)
@@ -173,6 +215,7 @@ app.controller("ProfileCtrl", function($scope, $firebaseArray, $firebaseAuth, $f
                             $scope.days.push(formatDate(value[i].created_time));
                             try
                             {
+                              $scope.sentimentsArray.push(value[i].name);
                               $scope.days.push(formatDate(value[i].created_time));
                               $scope.picLikes += value[i].likes.data.length;
                               if(value[i].likes.data.length >= $scope.sumL)
@@ -188,6 +231,14 @@ app.controller("ProfileCtrl", function($scope, $firebaseArray, $firebaseAuth, $f
                             try
                             {
                               $scope.commentTotal += value[i].comments.data.length;
+                            }
+                            catch(error)
+                            {
+
+                            }
+                            try
+                            {
+                              $scope.picsArray.push(value[i].name);
                             }
                             catch(error)
                             {
@@ -255,6 +306,14 @@ app.controller("ProfileCtrl", function($scope, $firebaseArray, $firebaseAuth, $f
                             {
 
                             }
+                            try
+                            {
+                              $scope.postsArray.push(value[i].message);
+                            }
+                            catch(error)
+                            {
+
+                            }
                         }
                         $scope.totalLikes = $scope.picLikes + $scope.postLikes;
                         $scope.totalComments = $scope.postComments + $scope.commentTotal;
@@ -270,6 +329,9 @@ app.controller("ProfileCtrl", function($scope, $firebaseArray, $firebaseAuth, $f
                         $scope.bestPosts[0].updated_time = ConvertUTCTimeToLocalTime($scope.bestPosts[0].updated_time);
                         console.log($scope.finalDay);
                         console.log($scope.bestPosts);
+                        analyzeSentiments($scope.picsArray);
+                        analyzeSentiments($scope.postsArray);
+                        console.log(summation($captionScores));
                       }
                     });
                   }
@@ -429,19 +491,3 @@ app.controller("HomeCtrl", function($firebaseObject,$document,$scope, $firebaseA
 	  
  });
  */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
