@@ -129,6 +129,7 @@ app.controller("AppController", function($scope, $firebaseArray, $firebaseAuth,$
 
 app.controller("ProfileCtrl", function($scope, $http, $firebaseArray, $firebaseAuth, $firebaseObject,$routeParams,$location,$window,currentAuth) 
 {
+	$scope.grandTotal = 0;
 	$scope.bestPosts = [];
 	$scope.sumL = 0;
 	$scope.sumC = 0;
@@ -304,7 +305,7 @@ app.controller("ProfileCtrl", function($scope, $http, $firebaseArray, $firebaseA
                         console.log($scope.picsArray.length+" "+$scope.postsArray.length);
                         analyzeSentiments($scope.picsArray);
                         analyzeSentiments($scope.postsArray);
-                        console.log(summation($scope.captionScores));
+                        console.log(summation($scope.captionScores)+" "+$scope.grandTotal);
                       }
                     });
                   }
@@ -329,9 +330,15 @@ app.controller("ProfileCtrl", function($scope, $http, $firebaseArray, $firebaseA
 					text: mySentiments[i]
 				}
 			}).then(function(response) {
-				console.log(response);
-				// $scope.grandTotal += response.data.score;
-				// $scope.captionScores.push((response.data.score).toFixed(2));
+				try
+				{
+					$scope.grandTotal += response.data.score;
+					$scope.captionScores.push((response.data.score).toFixed(2));
+				}
+				catch(error)
+				{
+
+				}
 			})
 		}
 		// $http({
