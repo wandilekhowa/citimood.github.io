@@ -265,7 +265,6 @@ app.controller("ProfileCtrl", function($scope, $firebaseArray, $firebaseAuth, $f
                         var differntDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
                         $scope.finalDay = differntDays[commonDay[0][0]];
                         $scope.bestPic.created_time = ConvertUTCTimeToLocalTime($scope.bestPic.created_time);
-                        $scope.bestPic.updated_time = ConvertUTCTimeToLocalTime($scope.bestPic.updated_time);
                         $scope.bestPosts.push($scope.bestPic);
                         $scope.bestPosts.push($scope.bestPost);
                         console.log($scope.finalDay);
