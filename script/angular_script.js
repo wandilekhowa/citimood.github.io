@@ -117,9 +117,11 @@ app.controller("ProfileCtrl", function($scope, $firebaseArray, $firebaseAuth, $f
   console.log($routeParams.userID);
   $scope.userName = $routeParams.userName;
   $scope.home = $routeParams.userHometown;
-  FB.api('/me?fields=id,name,cover,hometown,about,bio,gender,picture,languages,link,locale,location,updated_time,timezone,work', function(response) 
+  FB.api('/me?fields=id,name,cover,hometown,about,bio,gender,picture,locale,location,updated_time,timezone,work', function(response) 
   {
     console.log(response);
+    $scope.profilePic = response.picture.data.url;
+    $scope.coverPic = response.cover.source;
     $scope.ref.child($routeParams.userID).child("Personal").push(response);
   });
 
