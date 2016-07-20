@@ -104,7 +104,7 @@ app.controller("AppController", function($scope, $firebaseArray, $firebaseAuth,$
 	} */
 });
 
-app.controller("ProfileCtrl", function($scope, $firebaseArray, $firebaseAuth,$routeParams,$location,$window,currentAuth) 
+app.controller("ProfileCtrl", function($scope, $firebaseArray, $firebaseAuth, $firebaseObject,$routeParams,$location,$window,currentAuth) 
 {
 	$scope.userName = $routeParams.name;		
 	console.log($scope.userName);
