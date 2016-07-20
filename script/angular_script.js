@@ -127,7 +127,7 @@ app.controller("AppController", function($scope, $firebaseArray, $firebaseAuth,$
 	} */
 });
 
-app.controller("ProfileCtrl", function($scope, $firebaseArray, $firebaseAuth, $firebaseObject,$routeParams,$location,$window,currentAuth) 
+app.controller("ProfileCtrl", function($scope, $http, $firebaseArray, $firebaseAuth, $firebaseObject,$routeParams,$location,$window,currentAuth) 
 {
 	$scope.bestPosts = [];
 	$scope.sumL = 0;
