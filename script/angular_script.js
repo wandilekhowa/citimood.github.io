@@ -330,15 +330,11 @@ app.controller("ProfileCtrl", function($scope, $http, $firebaseArray, $firebaseA
 					text: mySentiments[i]
 				}
 			}).then(function(response) {
-				try
+				if(response.data.score)
 				{
 					$scope.grandTotal += response.data.score;
 					console.log(response.data.score);
 					$scope.captionScores.push((response.data.score).toFixed(2));
-				}
-				catch(error)
-				{
-
 				}
 			})
 		}
@@ -352,7 +348,7 @@ app.controller("ProfileCtrl", function($scope, $http, $firebaseArray, $firebaseA
 		// 	}).then(function(response) {
 		// 		console.log(response);
 		// 	})
-}
+};
 		
 		/* $scope.authObj = $firebaseAuth();
 		$scope.login= function()
