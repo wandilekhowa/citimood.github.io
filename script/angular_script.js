@@ -326,7 +326,7 @@ app.controller("ProfileCtrl", function($scope, $firebaseArray, $firebaseAuth, $f
                         $scope.bestPosts.push($scope.bestPic);
                         $scope.bestPosts.push($scope.bestPost);
                         $scope.bestPosts[0].created_time = ConvertUTCTimeToLocalTime($scope.bestPosts[0].created_time);
-                        $scope.bestPosts[0].updated_time = ConvertUTCTimeToLocalTime($scope.bestPosts[0].updated_time);
+                        //$scope.bestPosts[0].updated_time = ConvertUTCTimeToLocalTime($scope.bestPosts[0].updated_time);
                         console.log($scope.finalDay);
                         console.log($scope.bestPosts);
                         analyzeSentiments($scope.picsArray);
