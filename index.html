@@ -1,0 +1,47 @@
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <script src="Day4/facebook.js"></script>
+      <link type="text/css" rel="stylesheet" href="Day4/home.css"/>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+      <title>Wandile's Personal Website</title>
+    </head>
+    <body>
+    <div class="wrapper">
+    <nav class="clearfix">
+      <a href="index.html"><h1 id="navTitle">Wandile</h1></a>
+      <ul class="list">
+        <li><a id="proj-menu" href="Day4/projects.html">Project</a></li>
+        <li><a id="prof-menu" href="Day4/professional.html">Professional</a></li>
+        <li><a id="edu-menu" href="Day4/education.html">Educational</a></li>
+        <li><a id="pers-menu" href="Day4/personal.html">Personal</a></li>
+      </ul>
+    </nav>
+    <div class="wrapper clearfix">
+        <div class="intro-text">
+          <h1>This is the introduction of my website</h1>  
+        </div>
+
+        <div class="personal fake"><div class="hover-overlay"></div></div>
+
+        <a id="proj-menu" href="Day4/personal.html"><div class="personal pers-img"><div class="hover-overlay real-pers"><h3>Personal Information</h3></div></div></a>
+
+        <a id="proj-menu" href="Day4/education.html"><div class="educational edu-img"><div class="hover-overlay real-edu"><h3>Educational Background</h3></div></div></a>
+
+        <div class="educational fake"><div class="hover-overlay"></div></div>
+
+        <div class="professional fake"><div class="hover-overlay"></div></div>
+
+        <a id="proj-menu" href="Day4/professional.html"><div class="professional prof-img"><div class="hover-overlay real-prof"><h3>Professional Qualifications</h3></div></div></a>
+
+        <a id="proj-menu" href="Day4/projects.html"><div class="projects proj-img"><div class="hover-overlay real-proj"><h3>Projects</h3></div></div></a>
+
+        <div class="projects fake"><div class="hover-overlay"></div></div>
+        <button class="btn btn-primary" scope="public_profile,email" onlogin="checkLoginState();">Login</button>
+        <div id="status"></div>
+        <div class="fb-like" data-share="true" data-width="450" data-show-faces="true">
+        </div>
+    </div>
+    </div>
+    </body>
+  </html>
