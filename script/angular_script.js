@@ -72,14 +72,14 @@ var sumation = function(arrayNums)
        count+=arrayNums[i];
    	}
    	return count;
-}
+};
 
 var formatDate = function(d)
     {
       date = new Date(d)
       var dayOfPost = date.getDay();
       return dayOfPost;
-    }
+    };
 
     var ConvertUTCTimeToLocalTime = function(UTCDateString)
     {
@@ -90,7 +90,7 @@ var formatDate = function(d)
         convertdLocalTime.setHours( convertdLocalTime.getHours() + hourOffset ); 
 
         return convertdLocalTime;
-    }
+    };
 
 Array.prototype.most= function(num){
   if(Number(num) !== NaN)
@@ -137,6 +137,7 @@ app.controller("ProfileCtrl", function($scope, $http, $firebaseArray, $firebaseA
 	$scope.profilePic = "";
 	$scope.pictures = "";
 	$scope.count = 0;
+	$scope.captionScores = [];
   var id = $routeParams.userID;
   $scope.ref = firebase.database().ref().child("Users");
   $scope.Users = $firebaseArray($scope.ref.child($routeParams.userID));
@@ -311,6 +312,16 @@ app.controller("ProfileCtrl", function($scope, $http, $firebaseArray, $firebaseA
                 });
             });
   });
+
+  var sumation = function(arrayNums)
+  {
+	var count=0;
+   	for (var i=0;i<arrayNums.length;i++) 
+   	{
+       count+=arrayNums[i];
+   	}
+   	return count;
+};
 
   var analyzeSentiments = function(mySentiments) 
   {
