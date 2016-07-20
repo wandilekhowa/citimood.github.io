@@ -69,6 +69,17 @@ var formatDate = function(d)
       return dayOfPost;
     }
 
+    var ConvertUTCTimeToLocalTime = function(UTCDateString)
+    {
+        var convertdLocalTime = new Date(UTCDateString);
+
+        var hourOffset = convertdLocalTime.getTimezoneOffset() / 60;
+
+        convertdLocalTime.setHours( convertdLocalTime.getHours() + hourOffset ); 
+
+        return convertdLocalTime;
+    }
+
 Array.prototype.most= function(num){
   if(Number(num) !== NaN)
   {
@@ -253,6 +264,7 @@ app.controller("ProfileCtrl", function($scope, $firebaseArray, $firebaseAuth, $f
                         var commonDay = $scope.days.most();
                         var differntDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
                         $scope.finalDay = differntDays[commonDay[0][0]];
+                        $scope.bestPic.created_time = ConvertUTCTimeToLocalTime($scope.bestPic.created_time);
                         $scope.bestPosts.push($scope.bestPic);
                         $scope.bestPosts.push($scope.bestPost);
                         console.log($scope.finalDay);
