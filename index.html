@@ -15,7 +15,30 @@
    
   </head>
   <body ng-app="citymoodApp" ng-controller="AppController">
-    <script>     
+    
+  
+     <div ng-view ></div>
+    
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/3.2.0/firebase.js"></script>
+    <script src="script/angular.js"></script><!--you might need CDN here-->
+    <script src="script/angular-route.js"></script><!--you might need CDN here-->
+    <!-- AngularFire -->
+    <script src="script/angularfire.min.js"></script>
+    <script src="script/angular_script.js"></script>
+    
+    <script>
+      // Initialize Firebase
+      var config = {
+      apiKey: "AIzaSyAPUKXtDWPqsfYu4IkjWOdJOnYwBt3CZKY",
+      authDomain: "city-mood-fab55.firebaseapp.com",
+      databaseURL: "https://city-mood-fab55.firebaseio.com",
+      storageBucket: "city-mood-fab55.appspot.com",
+      };
+      firebase.initializeApp(config);
+    </script>
+	
+	<script>     
         // This is called with the results from from FB.getLoginStatus().
   function statusChangeCallback(response) {
     console.log('statusChangeCallback');
@@ -96,27 +119,6 @@
     });
   }
       </script>
-  
-     <div ng-view ></div>
-    
-    <!-- Firebase -->
-    <script src="https://www.gstatic.com/firebasejs/3.2.0/firebase.js"></script>
-    <script src="script/angular.js"></script><!--you might need CDN here-->
-    <script src="script/angular-route.js"></script><!--you might need CDN here-->
-    <!-- AngularFire -->
-    <script src="script/angularfire.min.js"></script>
-    <script src="script/angular_script.js"></script>
-    
-    <script>
-      // Initialize Firebase
-      var config = {
-      apiKey: "AIzaSyAPUKXtDWPqsfYu4IkjWOdJOnYwBt3CZKY",
-      authDomain: "city-mood-fab55.firebaseapp.com",
-      databaseURL: "https://city-mood-fab55.firebaseio.com",
-      storageBucket: "city-mood-fab55.appspot.com",
-      };
-      firebase.initializeApp(config);
-    </script>
     
   </body>
 </html>

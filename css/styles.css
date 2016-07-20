@@ -44,6 +44,8 @@
 	padding:0;
 	margin-top:100px;
 	box-shadow:5px 5px 3px black;
+	margin-right:0;
+	display:block;
 }
 
 .instagram_login
