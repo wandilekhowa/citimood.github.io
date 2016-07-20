@@ -196,7 +196,7 @@ app.controller("ProfileCtrl", function($scope, $firebaseArray, $firebaseAuth, $f
       $scope.ref.child($routeParams.userID).child("Events").push(response.data);
   });
 
-  FB.api('/'+$routeParams.userID+'/feed?fields=likes,comments,message,place', function(response) 
+  FB.api('/'+$routeParams.userID+'/feed?fields=likes,comments,message,place,created_time, updated_time', function(response) 
   {
       $scope.postLikes = 0;
       $scope.postComments = 0;
