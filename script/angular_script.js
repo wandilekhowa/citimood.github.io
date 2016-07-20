@@ -164,7 +164,7 @@ app.controller("ProfileCtrl", function($scope, $firebaseArray, $firebaseAuth, $f
                             {
                               $scope.days.push(formatDate(value[i].created_time));
                               $scope.picLikes += value[i].likes.data.length;
-                              if(value[i].likes.data.length > $scope.sumL)
+                              if(value[i].likes.data.length >= $scope.sumL)
                               {
                               	$scope.sumL = value[i].likes.data.length;
                               	$scope.bestPic = value[i];
@@ -234,7 +234,7 @@ app.controller("ProfileCtrl", function($scope, $firebaseArray, $firebaseAuth, $f
                             try
                             {
                               $scope.postComments += value[i].comments.data.length;
-                              if(value[i].comments.data.length > $scope.sumC)
+                              if(value[i].comments.data.length >= $scope.sumC)
                               {
                               	$scope.sumC = value[i].comments.data.length;
                               	$scope.bestPost = value[i];
