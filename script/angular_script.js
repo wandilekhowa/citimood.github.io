@@ -299,6 +299,7 @@ app.controller("ProfileCtrl", function($scope, $http, $firebaseArray, $firebaseA
                         //$scope.bestPosts[0].updated_time = ConvertUTCTimeToLocalTime($scope.bestPosts[0].updated_time);
                         console.log($scope.finalDay);
                         console.log($scope.bestPosts);
+                        console.log($scope.picsArray.length+" "+$scope.postsArray.length);
                         analyzeSentiments($scope.picsArray);
                         analyzeSentiments($scope.postsArray);
                         console.log(summation($captionScores));
