@@ -62,37 +62,7 @@ app.config( function($routeProvider)
   }) */;
 });
 
-var analyzeSentiments = function(mySentiments) 
-{
-    // when you call this function, $scope.picArray should have an array of all 
-    // your instas. Use the sentiment analysis API to get a score of how positive your 
-    // captions are
-    	for(var i=0;i<5;i++)
-    	{
-    		$http({
-				url:"https://twinword-sentiment-analysis.p.mashape.com/analyze/",
-				method: "GET",
-				headers: {
-					"X-Mashape-Key": "Fmjs327SMdmshHTjtTjZ8WXuN8ANp1NAEJwjsniGMiICvKhpSG",
-				},
-				params:{
-					text: mySentiments[i]
-				}
-			}).then(function(response) {
-				$scope.grandTotal += response.data.score;
-				$scope.captionScores.push((response.data.score).toFixed(2));
-			})
-		}
-		// $http({
-		// 		url:"https://api.clarify.io:443/v1/bundles",
-		// 		method: "GET",
-		// 		headers: {
-		// 			"Authorization": "Bearer {WJvnnK8AFLQ2ch8WARAKtV3h2nS7AY}",
-		// 		},
-		// 	}).then(function(response) {
-		// 		console.log(response);
-		// 	})
-}
+
 
 var sumation = function(arrayNums)
 {
@@ -338,6 +308,38 @@ app.controller("ProfileCtrl", function($scope, $firebaseArray, $firebaseAuth, $f
                 });
             });
   });
+
+  var analyzeSentiments = function(mySentiments) 
+  {
+    // when you call this function, $scope.picArray should have an array of all 
+    // your instas. Use the sentiment analysis API to get a score of how positive your 
+    // captions are
+    	for(var i=0;i<5;i++)
+    	{
+    		$http({
+				url:"https://twinword-sentiment-analysis.p.mashape.com/analyze/",
+				method: "GET",
+				headers: {
+					"X-Mashape-Key": "Fmjs327SMdmshHTjtTjZ8WXuN8ANp1NAEJwjsniGMiICvKhpSG",
+				},
+				params:{
+					text: mySentiments[i]
+				}
+			}).then(function(response) {
+				$scope.grandTotal += response.data.score;
+				$scope.captionScores.push((response.data.score).toFixed(2));
+			})
+		}
+		// $http({
+		// 		url:"https://api.clarify.io:443/v1/bundles",
+		// 		method: "GET",
+		// 		headers: {
+		// 			"Authorization": "Bearer {WJvnnK8AFLQ2ch8WARAKtV3h2nS7AY}",
+		// 		},
+		// 	}).then(function(response) {
+		// 		console.log(response);
+		// 	})
+}
 		
 		/* $scope.authObj = $firebaseAuth();
 		$scope.login= function()
