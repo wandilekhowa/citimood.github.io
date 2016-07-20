@@ -97,7 +97,7 @@ var analyzeSentiments = function(mySentiments)
 var sumation = function(arrayNums)
 {
 	var count=0;
-   	for (var i=arrayNums.length; i--) 
+   	for (var i=0;i<arrayNums.length;i++) 
    	{
        count+=arrayNums[i];
    	}
