@@ -37,8 +37,32 @@ app.config( function($routeProvider)
       }
     }
   })
+  /*.when('/signup', 
+  {
+    controller: 'SignupCtrl',
+    templateUrl: 'templates/signup.html',
+    resolve: 
+	{
+     "currentAuth":function($firebaseAuth) 
+	  {
+        return $firebaseAuth().$waitForSignIn();
+      }
+    }
+  }).when('/channel/:channelId', 
+  {
+    controller: 'ChannelCtrl',
+    templateUrl: 'templates/channel.html',
+    resolve: 
+	{
+     "currentAuth":function($firebaseAuth) 
+	  {
+        return $firebaseAuth().$requireSignIn();
+      }
+    }
+  }) */;
+});
 
-  var formatDate = function(d)
+var formatDate = function(d)
     {
       date = new Date(d)
       var dayOfPost = date.getDay();
@@ -68,30 +92,6 @@ Array.prototype.most= function(num){
   }
   return [freq];
 }
-  /*.when('/signup', 
-  {
-    controller: 'SignupCtrl',
-    templateUrl: 'templates/signup.html',
-    resolve: 
-	{
-     "currentAuth":function($firebaseAuth) 
-	  {
-        return $firebaseAuth().$waitForSignIn();
-      }
-    }
-  }).when('/channel/:channelId', 
-  {
-    controller: 'ChannelCtrl',
-    templateUrl: 'templates/channel.html',
-    resolve: 
-	{
-     "currentAuth":function($firebaseAuth) 
-	  {
-        return $firebaseAuth().$requireSignIn();
-      }
-    }
-  }) */;
-});
 
 app.controller("AppController", function($scope, $firebaseArray, $firebaseAuth,$routeParams,$location,$window,$location) 
 {
