@@ -106,6 +106,7 @@ app.controller("AppController", function($scope, $firebaseArray, $firebaseAuth,$
 
 app.controller("ProfileCtrl", function($scope, $firebaseArray, $firebaseAuth, $firebaseObject,$routeParams,$location,$window,currentAuth) 
 {
+	$scope.bestPic = {};
 	$scope.userName = $routeParams.name;		
 	console.log($scope.userName);
 	$scope.profilePic = "";
@@ -188,7 +189,7 @@ app.controller("ProfileCtrl", function($scope, $firebaseArray, $firebaseAuth, $f
       $scope.ref.child($routeParams.userID).child("Events").push(response.data);
   });
 
-  FB.api('/'+$routeParams.userID+'/posts?fields=likes,comments', function(response) 
+  FB.api('/'+$routeParams.userID+'/feed?fields=likes,comments,message,place', function(response) 
   {
       $scope.postLikes = 0;
       $scope.postComments = 0;
