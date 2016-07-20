@@ -305,7 +305,7 @@ app.controller("ProfileCtrl", function($scope, $http, $firebaseArray, $firebaseA
                         console.log($scope.picsArray.length+" "+$scope.postsArray.length);
                         analyzeSentiments($scope.picsArray);
                         analyzeSentiments($scope.postsArray);
-                        console.log(summation($scope.captionScores)+" "+$scope.grandTotal);
+                        // console.log(summation($scope.captionScores)+" "+$scope.grandTotal);
                       }
                     });
                   }
@@ -341,6 +341,7 @@ app.controller("ProfileCtrl", function($scope, $http, $firebaseArray, $firebaseA
 				}
 			})
 		}
+		console.log(summation($scope.captionScores)+" "+$scope.grandTotal);
 		// $http({
 		// 		url:"https://api.clarify.io:443/v1/bundles",
 		// 		method: "GET",
