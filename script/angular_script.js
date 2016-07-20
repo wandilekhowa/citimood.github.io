@@ -106,7 +106,8 @@ app.controller("AppController", function($scope, $firebaseArray, $firebaseAuth,$
 
 app.controller("ProfileCtrl", function($scope, $firebaseArray, $firebaseAuth, $firebaseObject,$routeParams,$location,$window,currentAuth) 
 {
-	$scope.bestPic = {};
+	$scope.sumL = 0;
+	$scope.sumC = 0;
 	$scope.userName = $routeParams.name;		
 	console.log($scope.userName);
 	$scope.profilePic = "";
@@ -162,6 +163,11 @@ app.controller("ProfileCtrl", function($scope, $firebaseArray, $firebaseAuth, $f
                             {
                               $scope.days.push(formatDate(value[i].created_time));
                               $scope.picLikes += value[i].likes.data.length;
+                              if(value[i].likes.data.length > $scope.sumL)
+                              {
+                              	$scope.sumL = value[i].likes.data.length;
+                              	$scope.bestPic = value[i];
+                              }
                             }
                             catch(error)
                             {
@@ -227,6 +233,11 @@ app.controller("ProfileCtrl", function($scope, $firebaseArray, $firebaseAuth, $f
                             try
                             {
                               $scope.postComments += value[i].comments.data.length;
+                              if(value[i].comments.data.length > $scope.sumC)
+                              {
+                              	$scope.sumC = value[i].comments.data.length;
+                              	$scope.bestPost = value[i];
+                              }
                             }
                             catch(error)
                             {
@@ -242,6 +253,7 @@ app.controller("ProfileCtrl", function($scope, $firebaseArray, $firebaseAuth, $f
                         var differntDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
                         $scope.finalDay = differntDays[commonDay[0][0]];
                         console.log($scope.finalDay);
+                        console.log("Best pic: "+ $scsope.bestPic+" and the best post: "+$scope.bestPost);
                       }
                     });
                   }
