@@ -64,7 +64,7 @@ app.config( function($routeProvider)
 
 
 
-var sumation = function(arrayNums)
+var summation = function(arrayNums)
 {
 	var count=0;
    	for (var i=0;i<arrayNums.length;i++) 
@@ -313,16 +313,6 @@ app.controller("ProfileCtrl", function($scope, $http, $firebaseArray, $firebaseA
             });
   });
 
-  var sumation = function(arrayNums)
-  {
-	var count=0;
-   	for (var i=0;i<arrayNums.length;i++) 
-   	{
-       count+=arrayNums[i];
-   	}
-   	return count;
-};
-
   var analyzeSentiments = function(mySentiments) 
   {
     // when you call this function, $scope.picArray should have an array of all 
@@ -340,8 +330,9 @@ app.controller("ProfileCtrl", function($scope, $http, $firebaseArray, $firebaseA
 					text: mySentiments[i]
 				}
 			}).then(function(response) {
-				$scope.grandTotal += response.data.score;
-				$scope.captionScores.push((response.data.score).toFixed(2));
+				console.log(response);
+				// $scope.grandTotal += response.data.score;
+				// $scope.captionScores.push((response.data.score).toFixed(2));
 			})
 		}
 		// $http({
