@@ -333,6 +333,7 @@ app.controller("ProfileCtrl", function($scope, $http, $firebaseArray, $firebaseA
 				try
 				{
 					$scope.grandTotal += response.data.score;
+					console.log(response.data.score);
 					$scope.captionScores.push((response.data.score).toFixed(2));
 				}
 				catch(error)
