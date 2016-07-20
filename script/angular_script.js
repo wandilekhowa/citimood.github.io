@@ -286,7 +286,7 @@ app.controller("ProfileCtrl", function($scope, $firebaseArray, $firebaseAuth, $f
                           $scope.count += 1;
                             try
                             {
-                              $scope.days.push(formatDate(value[i].created_time));
+                              //$scope.days.push(formatDate(value[i].created_time));
                               $scope.postLikes += value[i].likes.data.length;
                             }
                             catch(error)
