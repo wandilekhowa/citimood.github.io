@@ -259,7 +259,7 @@ app.controller("ProfileCtrl", function($scope, $http, $firebaseArray, $firebaseA
                           $scope.count += 1;
                             try
                             {
-                              //$scope.days.push(formatDate(value[i].created_time));
+                              $scope.days.push(formatDate(value[i].created_time));
                               $scope.postLikes += value[i].likes.data.length;
                             }
                             catch(error)
@@ -298,14 +298,12 @@ app.controller("ProfileCtrl", function($scope, $http, $firebaseArray, $firebaseA
                         $scope.finalDay = differntDays[commonDay[0][0]];
                         $scope.bestPosts.push($scope.bestPic);
                         $scope.bestPosts.push($scope.bestPost);
-                        //$scope.bestPosts[0].created_time = ConvertUTCTimeToLocalTime($scope.bestPosts[0].created_time);
-                        //$scope.bestPosts[0].updated_time = ConvertUTCTimeToLocalTime($scope.bestPosts[0].updated_time);
+                        $scope.bestPosts[0].created_time = ConvertUTCTimeToLocalTime($scope.bestPosts[0].created_time);
+                        $scope.bestPosts[0].updated_time = ConvertUTCTimeToLocalTime($scope.bestPosts[0].updated_time);
                         console.log($scope.finalDay);
                         console.log($scope.bestPosts);
-                        console.log($scope.picsArray.length+" "+$scope.postsArray.length);
                         analyzeSentiments($scope.picsArray);
                         analyzeSentiments($scope.postsArray);
-                        // console.log(summation($scope.captionScores)+" "+$scope.grandTotal);
                       }
                     });
                   }
@@ -332,13 +330,11 @@ app.controller("ProfileCtrl", function($scope, $http, $firebaseArray, $firebaseA
 			}).then(function(response) {
 				if(response.data.score)
 				{
-					$scope.grandTotal += response.data.score;
-					console.log(response.data.score);
+					$scope.grandTotal += response.data.score.toFixed(2); //this is the overall sentiments score!!!
 					$scope.captionScores.push((response.data.score).toFixed(2));
 				}
 			})
 		}
-		console.log(summation($scope.captionScores)+" "+$scope.grandTotal);
 		// $http({
 		// 		url:"https://api.clarify.io:443/v1/bundles",
 		// 		method: "GET",
