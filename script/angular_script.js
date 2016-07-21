@@ -12,6 +12,8 @@ app.run(["$rootScope", "$location", function($rootScope, $location)
   });
 }]);
 
+
+
 app.config( function($routeProvider) 
 {
   $routeProvider.when('/', 
@@ -25,7 +27,7 @@ app.config( function($routeProvider)
         return $firebaseAuth().$waitForSignIn();
       }
     }
-  }) .when('/profile/:userID/:name/:hometown', 
+  }) .when('/profile', 
   {
     controller:'ProfileCtrl',
     templateUrl:'templates/profile.html',
@@ -36,11 +38,10 @@ app.config( function($routeProvider)
         return $firebaseAuth().$waitForSignIn();
       }
     }
-  })
-  /*.when('/signup', 
+  }).when('/mycity', 
   {
-    controller: 'SignupCtrl',
-    templateUrl: 'templates/signup.html',
+    controller: 'MyCityCtrl',
+    templateUrl: 'templates/mycity.html',
     resolve: 
 	{
      "currentAuth":function($firebaseAuth) 
@@ -48,7 +49,7 @@ app.config( function($routeProvider)
         return $firebaseAuth().$waitForSignIn();
       }
     }
-  }).when('/channel/:channelId', 
+  })/*.when('/channel/:channelId', 
   {
     controller: 'ChannelCtrl',
     templateUrl: 'templates/channel.html',
@@ -62,60 +63,6 @@ app.config( function($routeProvider)
   }) */;
 });
 
-
-
-var summation = function(arrayNums)
-{
-	var count=0;
-   	for (var i=0;i<arrayNums.length;i++) 
-   	{
-       count+=arrayNums[i];
-   	}
-   	return count;
-};
-
-var formatDate = function(d)
-    {
-      date = new Date(d)
-      var dayOfPost = date.getDay();
-      return dayOfPost;
-    };
-
-    var ConvertUTCTimeToLocalTime = function(UTCDateString)
-    {
-        var convertdLocalTime = new Date(UTCDateString);
-
-        var hourOffset = convertdLocalTime.getTimezoneOffset() / 60;
-
-        convertdLocalTime.setHours( convertdLocalTime.getHours() + hourOffset ); 
-
-        return convertdLocalTime;
-    };
-
-Array.prototype.most= function(num){
-  if(Number(num) !== NaN)
-  {
-    var L= this.length, freq= [], unique= [], 
-    tem, max= 1, index, count;
-    while(L>= max){
-        tem= this[--L];
-        if(unique.indexOf(tem)== -1){
-            unique.push(tem);
-            index= -1, count= 0;
-            while((index= this.indexOf(tem, index+1))!= -1){
-                ++count;
-            }
-            if(count> max){
-                freq= [tem];
-                max= count;
-            }
-            else if(count== max) freq.push(tem);
-        }
-    }
-  }
-  return [freq];
-}
-
 app.controller("AppController", function($scope, $firebaseArray, $firebaseAuth,$routeParams,$location,$window,$location) 
 {
 	/* $scope.authObj = $firebaseAuth();
@@ -127,224 +74,9 @@ app.controller("AppController", function($scope, $firebaseArray, $firebaseAuth,$
 	} */
 });
 
-app.controller("ProfileCtrl", function($scope, $http, $firebaseArray, $firebaseAuth, $firebaseObject,$routeParams,$location,$window,currentAuth) 
+app.controller("ProfileCtrl", function($scope, $firebaseArray, $firebaseAuth,$routeParams,$location,$window,currentAuth) 
 {
-	$scope.grandTotal = 0;
-	$scope.bestPosts = [];
-	$scope.sumL = 0;
-	$scope.sumC = 0;
-	$scope.userName = $routeParams.name;		
-	console.log($scope.userName);
-	$scope.profilePic = "";
-	$scope.pictures = "";
-	$scope.count = 0;
-	$scope.captionScores = [];
-  var id = $routeParams.userID;
-  $scope.ref = firebase.database().ref().child("Users");
-  $scope.Users = $firebaseArray($scope.ref.child($routeParams.userID));
-  $scope.pictures = [];
-  console.log($routeParams.userID);
-  $scope.home = $routeParams.userHometown;
-  FB.api('/me?fields=id,name,cover,hometown,about,bio,gender,picture,locale,location,updated_time,timezone,work', function(response) 
-  {
-    console.log(response);
-    $scope.profilePic = response.picture.data.url;
-    $scope.coverPic = response.cover.source;
-    $scope.ref.child($routeParams.userID).child("Personal").push(response);
-  });
-
-  FB.api('/'+$routeParams.userID+'/albums?fields=id,count,cover_photo,created_time,description,event,from,link,location,name,place,privacy,type,updated_time', function(response) 
-  {
-    $scope.days = [];
-    $scope.picsArray = [];
-    $scope.postsArray = [];
-      $scope.picLikes = 0;
-      $scope.commentTotal = 0;
-       $scope.albumID = response.data[1].id;
-       $scope.profAlbum = response.data[2].id;
-       console.log(response);
-       FB.api('/'+$scope.albumID+'/photos?fields=id,count,cover_photo,comments,likes,source,caption,created_time,description,event,from,link,location,name,place,privacy,type,updated_time', function(response) 
-       {
-            console.log(response);
-            $scope.ref.child($routeParams.userID).child("Photos").push(response.data);
-            var users = firebase.database().ref().child("Users");
-            var userObject = $firebaseObject(users);
-
-            userObject.$loaded().then(function() 
-            {
-              console.log("I am inside");
-                angular.forEach(userObject, function(value, key)
-                {
-                  if(key==id)
-                  {
-                    console.log(value);
-                    $scope.myPhotos = value.Photos;
-                    angular.forEach($scope.myPhotos, function(value, key)
-                    {
-                      if(key==Object.keys($scope.myPhotos)[0])
-                      {
-                        for(var i=0; i<value.length;i++)
-                        {
-                            $scope.count += 1;
-                            $scope.days.push(formatDate(value[i].created_time));
-                            try
-                            {
-                              $scope.days.push(formatDate(value[i].created_time));
-                              $scope.picLikes += value[i].likes.data.length;
-                              if(value[i].likes.data.length >= $scope.sumL)
-                              {
-                              	$scope.sumL = value[i].likes.data.length;
-                              	$scope.bestPic = value[i];
-                              }
-                            }
-                            catch(error)
-                            {
-
-                            }
-                            try
-                            {
-                              $scope.commentTotal += value[i].comments.data.length;
-                            }
-                            catch(error)
-                            {
-
-                            }
-                            try
-                            {
-                              $scope.picsArray.push(value[i].name);
-                            }
-                            catch(error)
-                            {
-
-                            }
-                        }
-                      }
-                    });
-                  }
-                });
-            });
-       });
-  });
-
-  FB.api('/'+$routeParams.userID+'/events?fields=id,attending_count,cover,category,description,declined_count,end_time,interested_count,maybe_count,name,place,start_time,timezone,type,updated_time', function(response) 
-  {
-      $scope.ref.child($routeParams.userID).child("Events").push(response.data);
-  });
-
-  FB.api('/'+$routeParams.userID+'/feed?fields=likes,comments,message,place,created_time, updated_time', function(response) 
-  {
-      $scope.postLikes = 0;
-      $scope.postComments = 0;
-      console.log("fetching feed");
-      console.log(response);
-      $scope.ref.child($routeParams.userID).child("Posts").push(response.data);
-            var users = firebase.database().ref().child("Users");
-            var userObject = $firebaseObject(users);
-            userObject.$loaded().then(function() 
-            {
-              console.log("I am inside posts");
-                angular.forEach(userObject, function(value, key)
-                {
-                  if(key==id)
-                  {
-                    console.log(value);
-                    $scope.myPosts = value.Posts;
-                    angular.forEach($scope.myPosts, function(value, key)
-                    {
-                      if(key==Object.keys($scope.myPosts)[0])
-                      {
-                        console.log(value);
-                        for(var i=0; i<value.length;i++)
-                        {
-                          $scope.count += 1;
-                            try
-                            {
-                              $scope.days.push(formatDate(value[i].created_time));
-                              $scope.postLikes += value[i].likes.data.length;
-                            }
-                            catch(error)
-                            {
-
-                            }
-                            try
-                            {
-                              $scope.postComments += value[i].comments.data.length;
-                              if(value[i].comments.data.length >= $scope.sumC)
-                              {
-                              	$scope.sumC = value[i].comments.data.length;
-                              	$scope.bestPost = value[i];
-                              }
-                            }
-                            catch(error)
-                            {
-
-                            }
-                            try
-                            {
-                              $scope.postsArray.push(value[i].message);
-                            }
-                            catch(error)
-                            {
-
-                            }
-                        }
-                        $scope.totalLikes = $scope.picLikes + $scope.postLikes;
-                        $scope.totalComments = $scope.postComments + $scope.commentTotal;
-                        console.log("Total likes: "+$scope.totalLikes);
-                        console.log("Total comments: "+$scope.totalComments);
-                        console.log($scope.days.length);
-                        var commonDay = $scope.days.most();
-                        var differntDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-                        $scope.finalDay = differntDays[commonDay[0][0]];
-                        $scope.bestPosts.push($scope.bestPic);
-                        $scope.bestPosts.push($scope.bestPost);
-                        $scope.bestPosts[0].created_time = ConvertUTCTimeToLocalTime($scope.bestPosts[0].created_time);
-                        $scope.bestPosts[0].updated_time = ConvertUTCTimeToLocalTime($scope.bestPosts[0].updated_time);
-                        console.log($scope.finalDay);
-                        console.log($scope.bestPosts);
-                        analyzeSentiments($scope.picsArray);
-                        analyzeSentiments($scope.postsArray);
-                      }
-                    });
-                  }
-                });
-            });
-  });
-
-  var analyzeSentiments = function(mySentiments) 
-  {
-    // when you call this function, $scope.picArray should have an array of all 
-    // your instas. Use the sentiment analysis API to get a score of how positive your 
-    // captions are
-    	for(var i=0;i<5;i++)
-    	{
-    		$http({
-				url:"https://twinword-sentiment-analysis.p.mashape.com/analyze/",
-				method: "GET",
-				headers: {
-					"X-Mashape-Key": "Fmjs327SMdmshHTjtTjZ8WXuN8ANp1NAEJwjsniGMiICvKhpSG",
-				},
-				params:{
-					text: mySentiments[i]
-				}
-			}).then(function(response) {
-				if(response.data.score)
-				{
-					$scope.grandTotal += response.data.score; //this is the overall sentiments score!!!
-					$scope.captionScores.push((response.data.score).toFixed(2));
-				}
-			})
-		}
-		// $http({
-		// 		url:"https://api.clarify.io:443/v1/bundles",
-		// 		method: "GET",
-		// 		headers: {
-		// 			"Authorization": "Bearer {WJvnnK8AFLQ2ch8WARAKtV3h2nS7AY}",
-		// 		},
-		// 	}).then(function(response) {
-		// 		console.log(response);
-		// 	})
-};
+		
 		
 		/* $scope.authObj = $firebaseAuth();
 		$scope.login= function()
@@ -363,13 +95,75 @@ app.controller("ProfileCtrl", function($scope, $http, $firebaseArray, $firebaseA
 				console.error("Authentication failed:", error);
 			});
 		}; */
+		
+		$(document).ready(function(){
+			$("#flip-best-posts").click(function(){
+				$("#panel-best-posts").slideToggle("slow");
+			});
+		});
 
+		
+		$(document).ready(function(){
+			$("#flip-likes").click(function(){
+				$("#panel-likes").slideToggle("slow");
+			});
+		});
+		
+		$(document).ready(function(){
+			$("#flip-to-do").click(function(){
+				$("#panel-to-do").slideToggle("slow");
+			});
+		});
+		
+		$(document).ready(function(){
+			$("#flip-summary").click(function(){
+				$("#panel-summary").slideToggle("slow");
+			});
+		});
+		
+		
 });
 
 app.controller("SignInCtrl", function($scope, $firebaseArray, $firebaseAuth,$routeParams,$location,$window,currentAuth) 
 {
 		
 
+
+});
+
+app.controller("MyCityCtrl", function($scope, $firebaseArray, $firebaseAuth,$routeParams,$location,$window,currentAuth) 
+{
+		$("#slideshow > div:gt(0)").hide();
+
+		setInterval(function() { 
+		  $('#slideshow > div:first')
+			.fadeOut(1000)
+			.next()
+			.fadeIn(1000)
+			.end()
+			.appendTo('#slideshow');
+		},  3000);
+		
+		$(document).ready(function(){
+			$("#flip-closer").click(function(){
+				$("#panel-closer").slideToggle("slow");
+			});
+		});
+		$(document).ready(function(){
+			$("#flip-adv-exc").click(function(){
+				$("#panel-adv-exc").slideToggle("slow");
+			});
+		});
+		$(document).ready(function(){
+			$("#flip-tou-sig").click(function(){
+				$("#panel-tou-sig").slideToggle("slow");
+			});
+		});
+		$(document).ready(function(){
+			$("#flip-att-sho").click(function(){
+				$("#panel-att-sho").slideToggle("slow");
+			});
+		});
 
 });
 
@@ -498,3 +292,19 @@ app.controller("HomeCtrl", function($firebaseObject,$document,$scope, $firebaseA
 	  
  });
  */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
